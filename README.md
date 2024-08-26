@@ -1,3 +1,5 @@
+Exemple pour cours devops
+
 # QuelPoke App
 
 Cette application est un petit serveur web qui génère dynamiquement des pages HTML en fonction d'un nom de Pokémon fourni par l'utilisateur. Elle utilise un algorithme pour déterminer quel Pokémon afficher et récupère les informations correspondantes depuis une API externe.
