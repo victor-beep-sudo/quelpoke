@@ -4,7 +4,7 @@ FROM golang:alpine AS builder
 WORKDIR /app
 
 # Download Go modules
-COPY src/go.mod src/go.sum src/index.tmpl.html src/main.go ./
+COPY go.mod go.sum index.tmpl.html main.go ./
 RUN go mod download
 
 # Build
