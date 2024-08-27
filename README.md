@@ -40,9 +40,9 @@ L'application dépend des services et modules suivants :
 
 ## Exemple d'utilisation
 
-### Executer en local
-
-##### Installer GO sur son poste: 
+### Executer en local:
+#### Méthode 1)
+##### Installer GO sur son poste:
 [GO-install](https://go.dev/doc/install)
 ##### Compiler dans le dossier racine de Quel Poke:
 [GO-compilalition](https://go.dev/doc/tutorial/compile-install)
@@ -55,6 +55,20 @@ L'application dépend des services et modules suivants :
 ```
 hello.exe
 ```
+##### Test l'application
+http://localhost:8080
+
+#### Méthode 2)
+##### Installer docker
+##### build grace au Dockerfile 
+```
+docker build -t quelpoke .
+```
+##### run le conteneur
+```
+docker run -d -p 8080:8080 quelpoke
+```
+
 ##### Test l'application
 http://localhost:8080
 
