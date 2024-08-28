@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Docker Login
         run: |
-          cat {{ secrets.DOCKER_KEY_VICTOR }} | docker login -u _json_key_base64 --password-stdin https://europe-west9-docker.pkg.dev
+          docker login -u _json_key_base64 --password-stdin https://europe-west9-docker.pkg.dev < {{ secrets.DOCKER_KEY_VICTOR }} 
       -
         name: Build and push
         uses: docker/build-push-action@v6
