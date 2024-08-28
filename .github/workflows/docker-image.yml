@@ -38,10 +38,10 @@ jobs:
         echo "Docker image size: $IMAGE_SIZE_MB MB"
         echo "::set-output name=image_size::$IMAGE_SIZE_MB"
 
-    - name: Fail if image size exceeds 100MB
-      if: steps.check_size.outputs.image_size > 100
+    - name: Fail if image size exceeds 7MB
+      if: steps.check_size.outputs.image_size > 7
       run: |
-        echo "Image size exceeds the limit of 100MB. Failing the job."
+        echo "Image size exceeds the limit of 7MB. Failing the job."
         exit 1
 
     - name: Push the Docker image to GCR
