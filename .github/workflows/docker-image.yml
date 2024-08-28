@@ -30,6 +30,19 @@ jobs:
       run: |
           docker build -t ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/my-app:$GITHUB_SHA .
           docker tag ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/my-app:$GITHUB_SHA ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/my-app:latest
+    - name: Check Docker image size
+      id: check_size
+      run: |
+        IMAGE_SIZE=$(docker image inspect ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/my-app:$GITHUB_SHA --format='{{.Size}}')
+        IMAGE_SIZE_MB=$(echo "scale=2; $IMAGE_SIZE/1024/1024" | bc)
+        echo "Docker image size: $IMAGE_SIZE_MB MB"
+        echo "::set-output name=image_size::$IMAGE_SIZE_MB"
+
+    - name: Fail if image size exceeds 100MB
+      if: steps.check_size.outputs.image_size > 100
+      run: |
+        echo "Image size exceeds the limit of 100MB. Failing the job."
+        exit 1
 
     - name: Push the Docker image to GCR
       run: docker push ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/my-app:$GITHUB_SHA
