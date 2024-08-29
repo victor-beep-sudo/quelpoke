@@ -49,5 +49,6 @@ jobs:
 
     - name: Logout from GCR
       run: docker logout https://${{ secrets.GCR_HOSTNAME }}
-    - name: Print the commit SHA
-      run: echo "Commit SHA: $GITHUB_SHA"
+    - name: Print the commit SHA   
+      run: |
+        echo "Commit SHA: $GITHUB_SHA"
