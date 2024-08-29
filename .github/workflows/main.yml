@@ -1,0 +1,32 @@
+
+name: deploy to kubernetes
+
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GKE_SERVICE_ACCOUNT_KEY }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: Use gcloud CLI
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+      
+    - name: Authenticate to GKE
+      run: |
+        gcloud container clusters get-credentials lab-cluster --zone europe-west9 --project infal-devops-sysops
+    - name: Create Namespace
+      run: |
+        kubectl apply -f pod-example.yaml
