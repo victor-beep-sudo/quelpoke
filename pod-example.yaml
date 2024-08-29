@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: quelpoke-victor
-        image: europe-west9-docker.pkg.dev/infal-devops-sysops/student-victor/my-app:latest
+        image: europe-west9-docker.pkg.dev/infal-devops-sysops/student-victor/my-app:e1d8729ab5969c4cd4f2423a0d8751e800beedaa
         ports:
         - containerPort: 8080
         resources:
