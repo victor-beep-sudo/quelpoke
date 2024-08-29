@@ -47,6 +47,19 @@ jobs:
     - name: Push the Docker image to GCR
       run: docker push ${{ secrets.GCR_HOSTNAME }}/${{ secrets.GCP_PROJECT_ID }}/my-app:$GITHUB_SHA
 
+
+    - name: Use gcloud CLI
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
+      
+    - name: Authenticate to GKE
+      run: |
+        gcloud container clusters get-credentials lab-cluster --zone europe-west9 --project infal-devops-sysops
+    - name: Create Namespace
+      run: |
+        kubectl apply -f pod-example.yaml
+
+
     - name: Logout from GCR
       run: docker logout https://${{ secrets.GCR_HOSTNAME }}
     - name: Print the commit SHA   
