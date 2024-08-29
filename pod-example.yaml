@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pod-victor
+  name: pod-victor-auto
   namespace: victor
   labels:
     app: quelpoke
